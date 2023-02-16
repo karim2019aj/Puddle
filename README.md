@@ -1,5 +1,6 @@
 # Marketplace
-Simple online marketplace where people can buy and sell items.E-commerce web app with 
+Simple online marketplace where people can buy and sell items.
+
 
 
 
