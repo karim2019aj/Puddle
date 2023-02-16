@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="py-12 px-6 mt-6 bg-gray-100 rounded-xl" >
+        <h2 class="mb-12 text-2xl text-center">Newest Items</h2>
+            <div class="grid grid-cols-5 gap-4">
+                    {% for item in items %}
+                        <div>
+                            <a href="{% url 'item:details' item.id %}">
+                                <div>
+                                    <img src="{{ item.image.url}}" class=" rounded-t-xl h-60 w-full">
+                                </div>
+                                <div class="p-6 bg-white rounded-b-xl">
+                                    <h2 class="text-xl">{{ item.name }}</h2>
+                                    <p class="text-gray-500">Price: {{ item.price }}$</p>
+                                    <p class="text-gray-500">Seller: {{ item.created_by }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+            </div>
+    </div>
+    <div class="py-6 px-6 mt-6 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Categories</h2>
+        <div class="grid grid-cols-4 gap-4">
+            {% for category in categories %}
+            <div class="p-6 bg-white rounded-xl border hover:border-teal-500">
+                <a href="./categories/{{ category.name }}">
+                    <h2 class="text-2xl text-center">{{ category.name }}</h2>
+                    <p class="text-gray-500">{{category.items.count}} items</p>  
+                </a>
+                   
+            </div>
+            {% endfor %}
+        </div>       
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+
+{% block content %}
+<div>
+    <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=600" alt="Your Company">
+    <h2 class="mt-6 text-center text-3xl font-bold tracking-teal text-gray-900">Create Account</h2>
+    <p class="mt-2 text-center text-sm text-gray-600">
+      Or
+      <a href="#" class="font-medium text-teal-600 hover:text-teal-500">Log in </a>
+      if you Already have account 
+    </p>
+  </div>
+<div class=" flex justify-center items-start pt-4 h-screen ">
+    
+    <div id="form" class="block bg-slate-50 p-6 rounded-xl shadow-md shadow-slate-300 w-90">
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %} 
+            <h2 class="text-teal-700 text-3xl font-semibold my-4"><center>Sign Up</center></h2>
+            <div id="fullname" class="flex flex-row">
+                <div id="firstname" class="w-1/2 mr-1">
+                    <label for="fname" class="text-sm">First Name*</label>
+                    {{ form.username }}    
+                </div>
+                <div id="lastname" class="w-1/2 mr-1">
+                    <label for="lname" class="text-sm">Last Name*</label>
+                    <input type="text" placeholder="Your last name" name="" id="lname"
+                        class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm" required>
+                        
+                </div>
+            </div>
+            <label for="email" class="text-sm">Email*</label><br>
+            {{ form.email }}    
+            <label for="password" class="text-sm">Password*</label><br>
+            {{ form.password1 }}    
+            <label for="Confirmpassword" class="text-sm"> Confirm Password*</label><br>
+            {{ form.password2 }}   
+            <div id="gender" class="text-sm mb-2">
+                <p class="mt-2">Gender*</p>
+                <input type="radio" name="gender" id="male" class="text-sm mx-1" checked><label
+                    for="male">Male</label>
+                <input type="radio" name="gender" id="female" class="text-sm mx-1" checked><label
+                    for="female">Female</label>
+            </div>
+            <input type="submit" name="" id="signUp"
+                class="bg-teal-700 w-full h-10 cursor-pointer text-white rounded-md hover:bg-teal-700 hover:outline outline-2 outline-teal-600 outline-offset-2 text-sm"><br>
+            <p class="text-xs my-2">Already have account?<a href="signin.html" class="text-blue-600">Login</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock  %}

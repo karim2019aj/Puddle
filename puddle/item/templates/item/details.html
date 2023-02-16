@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+
+{% block content %}
+<div class="grid grid-cols-3 gap-6 w-4/5">
+    <div class="col-span-1">
+        <img src="{{ item.image.url}}" class=" rounded-l border h-100 w-100">
+    </div>
+    <div class="col-span-2 border p-6 bg-gray-100 ">
+        <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+        <p class="text-gray-500"><strong>Price: </strong>{{ item.price }}$</p>
+        <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by }}</p>
+        <p class="text-gray-500"><strong>Description: </strong><br>{{ item.description }}</p>
+        <a href="#" class="inline-block mt-6 px-6 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
+        {% if request.user == item.created_by %}
+            <div class="mt-6 p-6 bg-white w-1/2" >
+                <p class="mb-5">This is your item</p>
+                <a href="{% url 'item:edit' item.id %}" class="my-3 px-4 py-2 text-lg font-semibold bg-teal-400 text-white rounded-xl hover:bg-teal-600">Edit</a>
+
+                <a href="{% url 'item:delete' item.id %}" class="my-3 px-4 py-2 text-lg font-semibold bg-red-400 text-white rounded-xl hover:bg-red-600">Delete</a>
+
+                
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class=" border py-12 px-6 mt-6 bg-gray-100" >
+    <h2 class="  mb-12 text-2xl text-center">Related Items</h2>
+    {% if  related_items %}
+        <div class="grid grid-cols-5 gap-4">
+            {% for item in related_items %}
+                <div>
+                    <a href="{% url 'item:details' item.id %}">
+                        <div>
+                            <img src="{{ item.image.url}}" class=" h-60 w-full">
+                        </div>
+                        <div class="p-6 bg-white ">
+                            <h2 class="text-2xl">{{ item.name }}</h2>
+                            <p class="text-gray-500">Price:{{ item.price }}$</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="flex justify-center items-center">
+            <div class="w-1/5 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                    <p class="font-bold">Info</p>
+                    <p class="text-sm">There is no related items.</p>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        
+    {% endif %} 
+
+</div>
+{% endblock %}

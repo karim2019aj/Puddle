@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Log in{% endblock %}
+
+
+{% block content %}
+<div class="flex flex-col items-center justify-center space-y-4">
+    <div>
+        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=600" alt="Your Company">
+        <h2 class="mt-6 text-center text-3xl font-bold tracking-teal text-gray-900">Welcome Back !</h2>
+    </div>
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Sign in to your account
+                    </h1>
+
+                    <form class="space-y-4 md:space-y-6" method="post" >
+                        {% csrf_token %} 
+                        {% if form.errors or form.non_field_errors %}
+                            <div class="mb-3 p-6 bg-red-100">
+                                {% for field in form  %}
+                                    {{ field.errors }}
+                                {% endfor %}
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <h2 class="text-teal-700 text-3xl font-semibold my-4"><center>Log in</center></h2>
+                        <div>
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username*</label>
+                            {{ form.username }}   
+                        </div>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password*</label><br>
+                            {{ form.password }} 
+                        </div>
+            
+            
+    
+                        <input type="submit" name="log in" id="login"
+                            class="my-2 bg-teal-700 w-full h-10 cursor-pointer text-white rounded-md hover:bg-teal-700 hover:outline outline-2 outline-teal-600 outline-offset-2 text-sm"><br>
+                        <p class="text-xs my-2"><a href="#" class="text-blue-600">Forgot password?</a></p>
+                    </form>
+                </div>
+    
+    </div> 
+</div>
+   
+
+
+{% endblock  %}
